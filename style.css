@@ -1,0 +1,340 @@
+/*----Стиль для мобильных----*/
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #2f2c27;
+  color: white;
+  font-size: 10px;
+  margin: 10px;
+}
+
+.hero {
+  height: 60vh;
+  background-image: url('img/2148846010.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow: hidden; /* чтобы ::after не выходил за рамки */
+
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4); /* или градиент */
+
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 24px;
+  text-align: center;
+  z-index: 2;
+}
+
+
+
+/*----ПРОЦЕДУРЫ----*/
+.services {
+  text-align: center;
+}
+
+/*----КАРТОЧКИ ПРОЦЕДУР----*/
+.services-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.service-card {
+  flex: 1;
+  padding: 20px;
+  min-width: 200px;
+  max-width: 400px;
+  background-color: #ccbcaa;
+  color: #222;
+
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.service-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  transition: 0.4s ease;
+
+}
+
+/*----Галерея----*/
+
+.gallery-grid {
+  display: grid;
+  gap: 15px;
+  max-width: 1200px;
+  margin: 40px auto;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.gallery-item img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+
+  transition: transform 0.4s ease, opacity 0.4s ease; 
+}
+
+.gallery-item:hover img {
+transform: scale(1.1);
+opacity: 0.8;
+
+}
+
+.gallery-item::after {
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: white;
+  opacity: 0;
+  transition: 0.4s ease;
+
+}
+
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+
+/*----МОДАЛКА----*/
+/*модалка для просмотра картинок, нужно потом анимацию добавить*/
+.modal-overlay {
+  position: fixed;
+  inset: 0; /* top:0, left:0 bottom:0, right0 */
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  opacity: 0 ;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+}
+
+/* Когда модалка активна */
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-window img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+
+  transform: scale(0.7);
+  transition: transform 0.4s ease;
+}
+
+/* Когда модалка активна — увеличиваем картинку */
+.modal-overlay.active img {
+  transform: scale(1);
+}
+
+/* ===== Бургер ===== */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #222;
+  color: white;
+  position: relative;
+}
+
+
+/* Меню по умолчанию — видно */
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+.nav a:hover {
+  color: #ffce00;
+  transform: translateY(1px);
+}
+
+/* Бургер по умолчанию — скрыт */
+.burger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+/* =====  мобилка =====*/
+@media (max-width: 768px) {
+.hero {
+  height: 40vh;
+}
+
+.nav {
+
+  flex-direction: column; /* вертикальный список */
+  position: absolute;
+  top: 55px;
+  right: 10px;
+  background: #333;
+  padding: 15px 20px;
+  border-radius: 10px;
+  gap: 15px;
+  z-index: 10000;
+
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+
+.burger { 
+  display: block; /* показать бургер */
+
+}
+.nav.active {
+opacity: 1;
+transform: translateY(0);
+pointer-events: auto;
+}
+
+.about-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+}
+
+/* ===== Планшет ===== */
+@media (min-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .services-container {
+    flex-direction: row; /* карточки в ряд */
+    justify-content: center;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 колонки на планшете */
+  }
+
+
+}
+
+/* ===== ПК ===== */
+@media (min-width: 1024px) {
+  body {
+    margin: 20px 50px;
+    font-size: 18px;
+  }
+
+.hero {
+  height: 70vh;
+  
+}
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки на ПК */
+  }
+}
+
+
+/* ===== О нас ===== */
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+
+  .about-box {
+  flex: 1;
+  background-color: #ccbcaa;
+  color: #222;
+  border-radius: 10%;
+
+  max-width: 600px;
+  margin: 20px auto;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+}
+
+.about-box img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.about-box p {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* ===== Контакты ===== */
+.contact-box {
+  max-width: 400px;
+  margin: 20px auto;
+  background: #ccbcaa;
+  color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.contact-box a {
+  color: #a9650d;
+  text-decoration: none;
+}
+
+.contact-box a:hover {
+  text-decoration: underline;
+}
+
