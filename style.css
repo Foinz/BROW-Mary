@@ -197,6 +197,8 @@ opacity: 0.8;
   font-size: 28px;
   cursor: pointer;
 }
+
+
 /* =====  мобилка =====*/
 @media (max-width: 768px) {
 .hero {
@@ -235,6 +237,11 @@ pointer-events: auto;
 .about-box {
     flex-direction: column;
     text-align: center;
+  }
+
+  .about-box::before {
+    width: 100px;
+    height: 100px;
   }
 
 }
@@ -294,7 +301,7 @@ pointer-events: auto;
   flex: 1;
   background-color: #ccbcaa;
   color: #222;
-  border-radius: 10%;
+  border-radius: 20px;
 
   max-width: 600px;
   margin: 20px auto;
@@ -304,12 +311,19 @@ pointer-events: auto;
   padding: 20px;
 }
 
-.about-box img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
+.about-box::before {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 120px;
+  background-image: url('img/master.jpg'); /* путь к фото */
+  background-size: cover;
+  background-position: center;
   border-radius: 100%;
+  flex-shrink: 0; /* чтобы не сжимался */
 }
+
+
 
 .about-box p {
   font-size: 16px;
